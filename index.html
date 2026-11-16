@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>緹點生肖站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#141416;
+    --bg-2:#2A2A2E;
+    --surface:#FFFFFF;
+    --ink:#221A1E;
+    --ink-soft:#6B5A62;
+    --ink-on-dark:#F5EEF1;
+    --ink-on-dark-soft:#B9A7B0;
+    --rose:#F2478F;
+    --deep-rose:#F1086A;
+    --line-green:#06C755;
+    --line-green-dark:#049E44;
+    --shadow: 0 14px 34px rgba(0,0,0,0.45);
+    --shadow-sm: 0 6px 16px rgba(0,0,0,0.35);
+    --font-display:'Noto Serif TC','PMingLiU','Songti TC',serif;
+    --font-body:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+    --font-rounded:'M PLUS Rounded 1c','Noto Sans TC',sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-1) 100%);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--deep-rose); color:#fff;}
+
+  .page{
+    max-width:760px;
+    margin:0 auto;
+    padding:56px 24px 40px;
+  }
+
+  .page,.backdrop{position:relative; z-index:1;}
+
+  .hero{text-align:center; margin-bottom:44px;}
+  .eyebrow{
+    display:inline-block;
+    font-family:var(--font-rounded);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.14em;
+    color:var(--deep-rose);
+    background:#fff;
+    padding:6px 18px;
+    border-radius:999px;
+    box-shadow:var(--shadow-sm);
+    margin-bottom:20px;
+  }
+  h1.brand{
+    font-family:var(--font-display);
+    font-weight:900;
+    font-size:clamp(34px,7vw,50px);
+    color:#FFFFFF;
+    margin:0 0 6px;
+    text-wrap:balance;
+    letter-spacing:0.02em;
+  }
+  .brand-sub{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(16px,3vw,19px);
+    color:#FFFFFF;
+    margin:0 0 18px;
+  }
+  .date-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-rounded);
+    font-weight:700;
+    font-size:15px;
+    color:#fff;
+    background:var(--deep-rose);
+    padding:8px 20px;
+    border-radius:999px;
+    box-shadow:var(--shadow-sm);
+  }
+  .keyword{
+    margin:18px auto 0;
+    max-width:520px;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:19px;
+    color:var(--ink-on-dark);
+    text-wrap:balance;
+  }
+  .keyword span{color:var(--deep-rose);}
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin:0 0 20px;
+  }
+  .section-head h2{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:24px;
+    color:var(--deep-rose);
+    margin:0;
+    white-space:nowrap;
+  }
+  .section-head .rule{
+    flex:1;
+    height:2px;
+    background:repeating-linear-gradient(90deg, var(--rose) 0 10px, transparent 10px 16px);
+    opacity:0.55;
+    border-radius:2px;
+  }
+  section{margin-bottom:56px;}
+
+  
+  .note-card{
+    background:linear-gradient(135deg,#FFF6FA,#FDEAF2);
+    border:1px solid rgba(242,71,143,0.25);
+    border-radius:22px;
+    padding:24px 26px 26px;
+    box-shadow:var(--shadow-sm);
+    margin-bottom:56px;
+  }
+  .note-card h2{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:20px;
+    color:var(--deep-rose);
+    margin:0 0 12px;
+  }
+  .note-card p{
+    margin:0 0 14px;
+    font-size:15px;
+    color:var(--ink);
+    line-height:1.9;
+  }
+  .note-card p:last-child{margin-bottom:0;}
+  .note-event{
+    background:#fff;
+    border-radius:16px;
+    padding:20px 20px 22px;
+  }
+  .note-event-title{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:16.5px;
+    color:var(--deep-rose);
+    margin:0 0 10px;
+  }
+  .note-event-intro{
+    margin:0 0 16px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    line-height:1.85;
+  }
+  .checklist{display:flex; flex-direction:column; gap:12px; margin-bottom:16px;}
+  .checklist-item{display:flex; gap:12px; align-items:flex-start;}
+  .checklist-badge{
+    flex:none;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    font-family:var(--font-rounded);
+    font-weight:800;
+    font-size:13px;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .checklist-text{flex:1;}
+  .checklist-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--ink);
+    margin-bottom:3px;
+  }
+  .checklist-body{
+    font-size:14px;
+    color:var(--ink-soft);
+    line-height:1.75;
+  }
+  .note-event-question{
+    margin:0;
+    background:linear-gradient(135deg,#FFF0F6,#FDE4EE);
+    border-radius:12px;
+    padding:14px 16px;
+    font-size:14px;
+    color:var(--deep-rose);
+    font-weight:700;
+    line-height:1.75;
+  }
+
+
+  .notice-list{display:flex; flex-direction:column; gap:16px;}
+  .notice-card{
+    background:var(--surface);
+    border-radius:22px;
+    padding:22px 24px 24px;
+    box-shadow:var(--shadow-sm);
+    display:flex;
+    gap:16px;
+  }
+  .notice-num{
+    flex:none;
+    width:38px; height:38px;
+    border-radius:50%;
+    background:var(--deep-rose);
+    color:#fff;
+    font-family:var(--font-rounded);
+    font-weight:800;
+    font-size:17px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .notice-body h3{
+    margin:2px 0 8px;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:17px;
+    color:var(--ink);
+    text-wrap:balance;
+  }
+  .notice-body p{
+    margin:0;
+    font-size:15px;
+    color:var(--ink-soft);
+    line-height:1.85;
+  }
+
+  .zodiac-sub{
+    margin:-8px 0 24px;
+    font-size:14.5px;
+    color:var(--ink-on-dark-soft);
+  }
+  .zodiac-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px 14px;
+  }
+  @media (max-width:480px){
+    .zodiac-grid{grid-template-columns:repeat(3,1fr); gap:18px 10px;}
+  }
+  .zodiac-btn{
+    background:none;
+    border:none;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    font-family:var(--font-body);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .zc-circle{
+    width:100%;
+    aspect-ratio:1;
+    max-width:84px;
+    border-radius:50%;
+    background:var(--zc, var(--rose));
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:30px;
+    box-shadow:0 8px 18px rgba(0,0,0,0.4), inset 0 -4px 10px rgba(0,0,0,0.08);
+    border:3px solid #fff;
+    transition:transform 0.16s ease, box-shadow 0.16s ease;
+  }
+  .zc-label{
+    font-family:var(--font-rounded);
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--ink-on-dark);
+  }
+  .zodiac-btn:hover .zc-circle,
+  .zodiac-btn:focus-visible .zc-circle{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 12px 22px rgba(0,0,0,0.5), inset 0 -4px 10px rgba(0,0,0,0.08);
+  }
+  .zodiac-btn:focus-visible{outline:3px solid var(--deep-rose); outline-offset:4px; border-radius:20px;}
+
+  .backdrop{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:20;
+    padding:0;
+  }
+  .backdrop.open{display:flex;}
+  @media (min-width:640px){
+    .backdrop{align-items:center; padding:24px;}
+  }
+  .modal{
+    background:var(--surface);
+    width:100%;
+    max-width:640px;
+    max-height:88vh;
+    overflow-y:auto;
+    border-radius:28px 28px 0 0;
+    box-shadow:0 -10px 40px rgba(0,0,0,0.5);
+    animation:sheet-up 0.24s ease;
+  }
+  @media (min-width:640px){
+    .modal{border-radius:28px; animation:pop-in 0.2s ease;}
+  }
+  @keyframes sheet-up{from{transform:translateY(24px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  @keyframes pop-in{from{transform:scale(0.96); opacity:0;} to{transform:scale(1); opacity:1;}}
+  @media (prefers-reduced-motion:reduce){
+    .modal{animation:none;}
+  }
+  .modal-head{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:26px 26px 20px;
+    background:var(--zc, var(--deep-rose));
+    color:#fff;
+    border-radius:28px 28px 0 0;
+    position:sticky; top:0;
+  }
+  .modal-emoji{font-size:40px; line-height:1;}
+  .modal-title{font-family:var(--font-display); font-weight:900; font-size:22px;}
+  .modal-tagline{font-family:var(--font-display); font-weight:500; font-size:15px; opacity:0.92; margin-top:2px;}
+  .modal-close{
+    margin-left:auto;
+    flex:none;
+    width:34px; height:34px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,0.22);
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{background:rgba(255,255,255,0.34);}
+  .modal-body{margin:0; padding:22px 26px 30px;}
+  .modal-body .row{margin-bottom:20px;}
+  .modal-body .row:last-child{margin-bottom:0;}
+  .modal-body dt{
+    display:inline-block;
+    font-family:var(--font-rounded);
+    font-weight:800;
+    font-size:14px;
+    color:#fff;
+    background:var(--zc, var(--deep-rose));
+    padding:4px 14px;
+    border-radius:999px;
+    margin:0 0 8px;
+  }
+  .modal-body dd{
+    margin:0;
+    font-size:15px;
+    line-height:1.9;
+    color:var(--ink);
+  }
+
+  .cta-section{margin-top:8px; margin-bottom:0;}
+  .cta-card{
+    background:var(--surface);
+    border-radius:26px;
+    padding:30px 26px 26px;
+    text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .cta-card h2{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:21px;
+    color:var(--deep-rose);
+    margin:0 0 8px;
+    text-wrap:balance;
+  }
+  .cta-card p{
+    margin:0 0 22px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .line-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    text-decoration:none;
+    background:var(--line-green);
+    color:#fff;
+    font-family:var(--font-rounded);
+    font-weight:800;
+    font-size:18px;
+    padding:18px 20px;
+    border-radius:999px;
+    box-shadow:0 10px 24px rgba(6,199,85,0.35);
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .line-btn:hover{background:var(--line-green-dark); transform:translateY(-2px);}
+  .line-btn:focus-visible{outline:3px solid var(--line-green-dark); outline-offset:3px;}
+  .line-btn svg{flex:none;}
+  .cta-foot{
+    margin-top:14px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    opacity:0.85;
+  }
+
+  footer.brand-foot{
+    text-align:center;
+    margin-top:36px;
+    font-family:var(--font-display);
+    font-size:13px;
+    color:var(--ink-on-dark-soft);
+    opacity:0.85;
+  }
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <span class="eyebrow">論緣堂｜每週生肖運勢</span>
+    <h1 class="brand" style="color:#fff;">緹點迷津</h1>
+    <p class="brand-sub" style="color:#fff;">生肖運勢週報・完整解析</p>
+    <div class="date-pill">11/16－11/22</div>
+    <p class="keyword">本週關鍵句｜<span>衝勁很足的一週，記得把承諾、成本和體力一起算進去。</span></p>
+  </header>
+
+  <div class="note-card">
+    <h2>✨ 緹點本週</h2>
+    <p>這週有行動力，也有想一次做很多事的衝動。</p><p>機會來的時候，先看資源與體力跟不跟得上；<br>合作談到金錢與權責，就白紙黑字。</p><p>天氣轉冷，小雪將至，<br>保暖、睡眠與說話的火氣一起顧好。</p><p><strong>往前衝之前，先確認自己真正想去的地方。</strong></p>
+    <div class="note-event">
+      <h3 class="note-event-title">📅 本週守運清單｜11/16～11/22</h3>
+      <p class="note-event-intro">這週有午時日照、月光淨化兩個開運小物的好時機，週日還迎來小雪。每天適合做什麼，幫你整理好了。</p>
+      <div class="checklist"><div class="checklist-item">
+          <span class="checklist-badge" style="background:#FF6B5B">💰 1</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/16（一）｜補運、補財庫</div>
+            <div class="checklist-body">傳統上適合補運與補財庫，也適合開市、簽約、交易。<br>早晚溫差與濕氣較重，過敏體質者留意保暖。</div>
+          </div>
+        </div><div class="checklist-item">
+          <span class="checklist-badge" style="background:#FFB020">☀️ 2</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/17（二）｜午時開光、祈福</div>
+            <div class="checklist-body">傳統上適合祈福。午時（11:00～13:00）可把開運小物放到戶外日照下：陽光強約 10～15 分鐘，陰天約半小時，用來清除舊氣、重新啟動能量。<br>訂盟納采、理髮、為先人安葬等事項也列為適宜。</div>
+          </div>
+        </div><div class="checklist-item">
+          <span class="checklist-badge" style="background:#5FC768">🍽️ 3</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/18（三）｜飲食留意</div>
+            <div class="checklist-body">這天傳統上建議不吃牛肉及相關加工食品，本命相關者尤其留意。</div>
+          </div>
+        </div><div class="checklist-item">
+          <span class="checklist-badge" style="background:#3FB6E8">🔧 4</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/19（四）｜小變動就好</div>
+            <div class="checklist-body">可開光、交易、出行；但不適合大幅度或繁重的變動，輕微調整即可。</div>
+          </div>
+        </div><div class="checklist-item">
+          <span class="checklist-badge" style="background:#A184E8">🛏️ 5</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/20（五）｜安床、祭祀</div>
+            <div class="checklist-body">傳統上適合安床、祭祀。</div>
+          </div>
+        </div><div class="checklist-item">
+          <span class="checklist-badge" style="background:#4D6FE0">🌕 6</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/21（六）｜月光淨化、不宜交易</div>
+            <div class="checklist-body">晚上若看得到月光，可把水晶與開運飾品放在戶外約一小時，招財配件尤其適合。<br>當天不建議做交易，出行可行，其餘事項宜少取。</div>
+          </div>
+        </div><div class="checklist-item">
+          <span class="checklist-badge" style="background:#C24DE8">❄️ 7</span>
+          <div class="checklist-text">
+            <div class="checklist-title">11/22（日）｜小雪 15:23</div>
+            <div class="checklist-body">節氣小雪於 15:23 到來。傳統上適合祈福，但不宜動土與婚嫁類事項。<br>互動時容易火氣大，說話放慢一點。</div>
+          </div>
+        </div></div>
+      <p class="note-event-question">你的開運小物，打算週二曬太陽，還是週六曬月光？</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="notice-h">
+    <div class="section-head">
+      <h2 id="notice-h" style="color:#fff;">⚠️ 緹醒你一下</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="zodiac-sub" style="margin-top:-14px;">本週三大注意事項</p>
+    <div class="notice-list">
+      <div class="notice-card">
+        <div class="notice-num">1</div>
+        <div class="notice-body"><h3>工作｜先評估再承接</h3><p>這週機會與案子容易同時湧來，適合趁機重新談合作、預算與分潤。<br>也容易出現各自堅持己見、環境變動或一句話引起的職場緊張，別人給提醒時，先聽完再回應。<br>想法很多的時候，先確認人手、時間和流程跟不跟得上，再決定要不要接。<br><strong>能做到的事再答應，答應了就把分工寫清楚。</strong></p></div>
+      </div><div class="notice-card">
+        <div class="notice-num">2</div>
+        <div class="notice-body"><h3>財務與合作｜條件寫清楚最安心</h3><p>這週容易碰到合作款項、分潤或支出增加的事，居家、辦公空間或生活設備也可能有較大的開銷。<br>凡是涉及合約、分潤、報價，建議白紙黑字確認，避免只憑熱情口頭答應。<br>也要留意收支和意外損失，先檢查訂閱、長期固定支出和隱藏成本，再決定要不要加碼。<br><strong>賺得到是本事，留得住要靠管理。</strong></p></div>
+      </div><div class="notice-card">
+        <div class="notice-num">3</div>
+        <div class="notice-body"><h3>健康與人際｜過勞、睡眠與火氣</h3><p>這週大家都要提高對意外和刀刃割傷的警覺，也要留意過勞、睡眠不足、運動過量和情緒緊繃，血壓、視力、腸胃和肩頸比較敏感的人更要照顧好。<br>小雪當天容易脾氣上來得快、收得也快，說話前先停一下。<br>以上為民俗與生活提醒，身體不適請依醫師建議處理。<br><strong>先把自己顧好，才有力氣顧別人。</strong></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="zodiac-h">
+    <div class="section-head">
+      <h2 id="zodiac-h">找你的生肖</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="zodiac-sub">點一下生肖，看這週完整運勢解析</p>
+    <div class="zodiac-grid" id="zodiacGrid">
+      <button class="zodiac-btn" data-target="rat" style="--zc:#4D6FE0"><span class="zc-circle">鼠</span><span class="zc-label">屬鼠</span></button><button class="zodiac-btn" data-target="ox" style="--zc:#A184E8"><span class="zc-circle">牛</span><span class="zc-label">屬牛</span></button><button class="zodiac-btn" data-target="tiger" style="--zc:#FF6B5B"><span class="zc-circle">虎</span><span class="zc-label">屬虎</span></button><button class="zodiac-btn" data-target="rabbit" style="--zc:#FFB020"><span class="zc-circle">兔</span><span class="zc-label">屬兔</span></button><button class="zodiac-btn" data-target="dragon" style="--zc:#C24DE8"><span class="zc-circle">龍</span><span class="zc-label">屬龍</span></button><button class="zodiac-btn" data-target="snake" style="--zc:#2FBFA0"><span class="zc-circle">蛇</span><span class="zc-label">屬蛇</span></button><button class="zodiac-btn" data-target="horse" style="--zc:#FF8C42"><span class="zc-circle">馬</span><span class="zc-label">屬馬</span></button><button class="zodiac-btn" data-target="goat" style="--zc:#3FB6E8"><span class="zc-circle">羊</span><span class="zc-label">屬羊</span></button><button class="zodiac-btn" data-target="monkey" style="--zc:#5FC768"><span class="zc-circle">猴</span><span class="zc-label">屬猴</span></button><button class="zodiac-btn" data-target="rooster" style="--zc:#F2789F"><span class="zc-circle">雞</span><span class="zc-label">屬雞</span></button><button class="zodiac-btn" data-target="dog" style="--zc:#6B8CFF"><span class="zc-circle">狗</span><span class="zc-label">屬狗</span></button><button class="zodiac-btn" data-target="pig" style="--zc:#FF6FA5"><span class="zc-circle">豬</span><span class="zc-label">屬豬</span></button>
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-h">
+    <div class="cta-card">
+      <h2 id="cta-h">想要更深入的命理解析？</h2>
+      <p>加入論緣堂官方 LINE，讓邢老師與芷緹為你安排專屬命理諮詢預約</p>
+      <a class="line-btn" href="https://lin.ee/y6Pv4v8" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 2C6.477 2 2 5.79 2 10.44c0 4.17 3.548 7.66 8.34 8.313.325.07.767.216.879.497.101.253.066.65.033.907l-.142 1.07c-.043.317-.253 1.242 1.09.677 1.343-.564 7.22-4.31 9.850-7.38C23.79 12.65 24 11.6 24 10.44 24 5.79 19.523 2 12 2z" fill="#fff"/>
+        </svg>
+        加入官方 LINE，預約命理諮詢
+      </a>
+      <p class="cta-foot">論緣堂｜命盤・卜卦・流年・改名・風水・改運</p>
+    </div>
+  </section>
+
+  <footer class="brand-foot">緹點迷津｜生肖運勢週報</footer>
+
+</div>
+
+<div class="backdrop" id="backdrop">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div>
+</div>
+
+
+<template id="tpl-rat">
+  <div class="modal-head" style="--zc:#4D6FE0">
+    <span class="modal-emoji">🐭</span>
+    <div><div class="modal-title" id="modalTitle">屬鼠</div><div class="modal-tagline">合作有機會，目標先落地</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>異性緣不錯，但好壞交雜，要靠判斷力分辨。有伴侶的人適合一起推動計畫，記得尊重彼此的節奏。</dd></div><div class="row"><dt>工作運勢</dt><dd>遇到突發狀況雖會拖慢進度，冷靜下來後能快速處理並交出好成績。合作與一對一的工作會帶來新機會，但權責與公開形象要先釐清；理想想得很大時，也要先確認團隊與制度跟得上。</dd></div><div class="row"><dt>財運提醒</dt><dd>收支大致平衡。合作有擴大收益的機會，收入與合約分潤要仔細確認，白紙黑字才有保障。</dd></div><div class="row"><dt>健康狀況</dt><dd>維持精神飽滿即可，留意人際壓力與情緒消耗。</dd></div><div class="row"><dt>好運方法</dt><dd>做好情緒管理，待人處事展現樂觀態度。週一、週二多留心節奏。<br><strong>跑得快不難，兩個人願意一起調整速度才走得遠。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-ox">
+  <div class="modal-head" style="--zc:#A184E8">
+    <span class="modal-emoji">🐮</span>
+    <div><div class="modal-title" id="modalTitle">屬牛</div><div class="modal-tagline">資源重整，穩住節奏</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男女感情大致維持穩定。親密關係中的信任與金錢分配這週容易被放大，別忽略問題，也別把控制當成給對方的安全感。</dd></div><div class="row"><dt>工作運勢</dt><dd>工作運勢強，雖然容易遇到意外而延遲進度，靠踏實與專業能快速處理。這週適合重新協商資源分配、預算與分潤。</dd></div><div class="row"><dt>財運提醒</dt><dd>收支平衡。若遇到較大規模的資金或合作案，風險也跟著變高，重大決定先評估清楚。</dd></div><div class="row"><dt>健康狀況</dt><dd>維持元氣即可，留意工作壓力與長期疲勞。</dd></div><div class="row"><dt>好運方法</dt><dd>展現合群與幽默，合作時把權責與風險寫清楚。週二、週三多留心。<br><strong>好的合作，是權責清楚、風險看得見，不是資源越多越好。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-tiger">
+  <div class="modal-head" style="--zc:#FF6B5B">
+    <span class="modal-emoji">🐯</span>
+    <div><div class="modal-title" id="modalTitle">屬虎</div><div class="modal-tagline">遠一點的目標，慢慢走</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男生較偏好自由、感情熱度可能下降；女生異性緣不錯，有意願的話有機會提高脫單機率。11/22 前後想談未來規劃時可以說出來，但別要求對方立刻回應或跟上你的節奏。</dd></div><div class="row"><dt>工作運勢</dt><dd>活力足但容易粗心，所幸有長輩與主管支持，能逆轉局勢。教學、研究、出版、跨國合作與進修都有推進空間，可多參加研習與講座。</dd></div><div class="row"><dt>財運提醒</dt><dd>學習、旅行、事業擴張的支出可能增加，先做好實際評估。</dd></div><div class="row"><dt>健康狀況</dt><dd>留意遠行與過度工作累積的疲勞。</dd></div><div class="row"><dt>好運方法</dt><dd>保持幽默、寬容，把夢想拆成自己承擔得起的步驟。<br><strong>夢想可以很大，每一步走在自己承受得住的路上。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-rabbit">
+  <div class="modal-head" style="--zc:#FFB020">
+    <span class="modal-emoji">🐰</span>
+    <div><div class="modal-title" id="modalTitle">屬兔</div><div class="modal-tagline">公開舞台，運勢上揚</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>異性緣旺，男女都有機會，提高脫單機率。伴侶間要避免把職場壓力帶回關係裡；對方的節奏也要尊重，別把期待強度加在對方身上。</dd></div><div class="row"><dt>工作運勢</dt><dd>踏實、耐心、細心，工作效率提升，遇到阻礙也能有條理處理。企圖心、公開形象與領導機會都被放大，適合爭取重要專案；週中可能因立場或權責產生摩擦，說話留餘地。</dd></div><div class="row"><dt>財運提醒</dt><dd>靈感敏銳，金融市場可能有不錯報酬；長期收入機會出現時也別過度樂觀。</dd></div><div class="row"><dt>健康狀況</dt><dd>留意高壓工作、睡眠與情緒緊繃。週四多留心。</dd></div><div class="row"><dt>好運方法</dt><dd>人緣好又有幽默感，把力氣放在值得打的仗上。<br><strong>實力不在每場都贏，在於知道哪些值得打。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-dragon">
+  <div class="modal-head" style="--zc:#C24DE8">
+    <span class="modal-emoji">🐲</span>
+    <div><div class="modal-title" id="modalTitle">屬龍</div><div class="modal-tagline">人脈帶來新機會</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男生維持穩定；女生要注意用詞，太尖銳容易引起風波。單身者可透過朋友或共同活動認識新對象，主動一點更有機會。</dd></div><div class="row"><dt>工作運勢</dt><dd>行動力足，但粗心可能讓工作停滯；靠上進心與專業能創造意外佳績。團隊合作與人脈可能帶來新發展。</dd></div><div class="row"><dt>財運提醒</dt><dd>有天降之喜，越積極往外發展越容易有收穫；團隊合作的資源、收入與分潤要再確認。</dd></div><div class="row"><dt>健康狀況</dt><dd>維持精神即可，避免社交過多累積疲勞。週五多留心。</dd></div><div class="row"><dt>好運方法</dt><dd>做好情緒管理，應對進退有禮有節。<br><strong>好人脈是幫你找到適合的事，不必每件都接下來。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-snake">
+  <div class="modal-head" style="--zc:#2FBFA0">
+    <span class="modal-emoji">🐍</span>
+    <div><div class="modal-title" id="modalTitle">屬蛇</div><div class="modal-tagline">工作放慢一點，感情反而有溫度</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>這週感情是你比較亮的一塊。女生異性緣不錯，有意願就有機會脫單；男生則要放寬心，有情緒就說開，別和伴侶冷戰。心裡的感受慢慢談，不必急著逼出答案。</dd></div><div class="row"><dt>工作運勢</dt><dd>工作上的整體運勢偏低，想法雖然獨特，卻容易太相信自己的判斷，把別人的提醒當耳邊風，成效就跟著打折。這週適合做研究、策劃和幕後準備，手上還沒公開的案子和檔案，值得再檢查一次。</dd></div><div class="row"><dt>財運提醒</dt><dd>收支大致打平，不過要留意意外的開銷。適合檢查隱藏成本、訂閱服務和長期固定支出。</dd></div><div class="row"><dt>健康狀況</dt><dd>留意血壓、視力和睡眠壓力，用刀、處理尖銳物品時也多小心。</dd></div><div class="row"><dt>好運方法</dt><dd>放軟身段，接受長輩和貴人的建議。週二避開氣氛不好的場合，週六、週日不要安排重要的事，週六更要多留心。<br><strong>工作上先慢一點，把看不到的問題處理好；感情上把心意說出口。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-horse">
+  <div class="modal-head" style="--zc:#FF8C42">
+    <span class="modal-emoji">🐴</span>
+    <div><div class="modal-title" id="modalTitle">屬馬</div><div class="modal-tagline">熱度升高，別急著承諾</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男女異性緣都旺，好壞交雜要用判斷力分辨。這週較有意願主動追求，有伴侶適合安排約會與共同活動；心動不等於承諾，別一時投入過度。</dd></div><div class="row"><dt>工作運勢</dt><dd>環境變化大時容易措手不及，靠貴人與長官支持迎頭趕上。企圖心與領導意願強，適合爭取自己的舞台，但團隊資源分配要小心。</dd></div><div class="row"><dt>財運提醒</dt><dd>收支平衡。專業與品牌可能帶來機會，別因為自信忽略合約細節。</dd></div><div class="row"><dt>健康狀況</dt><dd>留意過勞與運動傷害，休息要夠。週日多留心。</dd></div><div class="row"><dt>好運方法</dt><dd>保持開朗、平易近人。<br><strong>領導力不是只帶頭衝，是讓團隊跟得上。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-goat">
+  <div class="modal-head" style="--zc:#3FB6E8">
+    <span class="modal-emoji">🐑</span>
+    <div><div class="modal-title" id="modalTitle">屬羊</div><div class="modal-tagline">收入有機會，先算清楚成本</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男生異性緣不錯，積極主動有機會脫單；女生偏好自由，感情可能漸行漸遠。感情、金錢、時間安排上容易有衝突，時間太緊就讓步調放慢，別變成壓力。</dd></div><div class="row"><dt>工作運勢</dt><dd>心態樂觀活力足，但環境變化快、問題多，容易疲於奔命，績效不如預期。收入、業績、報價與專業價值是焦點，適合爭取合理報酬。</dd></div><div class="row"><dt>財運提醒</dt><dd>有擴大收入的機會，但容易高估短期收益，把成本與資金需求攤開看清楚。</dd></div><div class="row"><dt>健康狀況</dt><dd>容易失眠，要留意意外與刀刃傷害，也要注意工作量、飲食與壓力。</dd></div><div class="row"><dt>好運方法</dt><dd>保持樂觀與平易近人。週四避開氛圍不佳之處，週六小心意外，週日也多留心。<br><strong>賺得多是能力，留得下來才是管理。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-monkey">
+  <div class="modal-head" style="--zc:#5FC768">
+    <span class="modal-emoji">🐵</span>
+    <div><div class="modal-title" id="modalTitle">屬猴</div><div class="modal-tagline">有上台的機會，話和錢都要算清楚</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>這週適合主動邀約，但話別說得太滿。男生要特別注意跟伴侶說話的用詞，太衝、不留餘地的話容易引發風波；女生感情大致平順。</dd></div><div class="row"><dt>工作運勢</dt><dd>這週有表現的舞台，創作、簡報、教學和社群經營都推得動，適合推出新作品。只是環境變化大，一句說重的話就可能讓職場氣氛變緊張，努力的成果也未必馬上被看見。成果照實呈現，不要過度包裝，說話留點餘地，舞台才站得住。</dd></div><div class="row"><dt>財運提醒</dt><dd>行銷、交通和學習的支出可能增加，也要留意意外造成的財物損失。花錢前先算清楚能不能回本。</dd></div><div class="row"><dt>健康狀況</dt><dd>容易便祕，留意肩頸、神經緊繃和交通安全，用刀、處理尖銳物品時也要小心。</dd></div><div class="row"><dt>好運方法</dt><dd>管理好情緒，從容有禮，讓對方聽懂比講得大聲更重要。週二多留心，週五避開氣氛不好的場合，週日小心意外。<br><strong>機會已經在眼前，能不能接住，就看說話的分寸和花錢的節制。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-rooster">
+  <div class="modal-head" style="--zc:#F2789F">
+    <span class="modal-emoji">🐔</span>
+    <div><div class="modal-title" id="modalTitle">屬雞</div><div class="modal-tagline">家與事業一起顧</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男生異性緣旺但爛桃花偏多，需謹慎，否則容易受傷；女生人緣好，有意願就有機會脫單。家庭安排、生活習慣與責任分工容易起摩擦，語氣放柔。</dd></div><div class="row"><dt>工作運勢</dt><dd>積極接受挑戰，靠專業與領導力超越障礙。辦公空間、居住環境、家庭與事業的內部管理，都值得同步投入心力。</dd></div><div class="row"><dt>財運提醒</dt><dd>收支平衡。房屋、家庭與生活設備可能有較大開銷，避免臨時擴大預算。</dd></div><div class="row"><dt>健康狀況</dt><dd>留意睡眠、壓力與生活節奏。週一、週四多留心。</dd></div><div class="row"><dt>好運方法</dt><dd>提振自信，有禮有節，責任找人一起分擔。<br><strong>安全感不需要什麼都自己扛，有人一起分擔更踏實。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-dog">
+  <div class="modal-head" style="--zc:#6B8CFF">
+    <span class="modal-emoji">🐶</span>
+    <div><div class="modal-title" id="modalTitle">屬狗</div><div class="modal-tagline">選對舞台，家也要顧</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男生異性緣好，積極主動有機會脫單；女生偏好自在，感情可能逐漸淡出。</dd></div><div class="row"><dt>工作運勢</dt><dd>獨特想法有時缺乏溝通技巧，造成緊張；即使有貴人支持，成績維持及格。能見度、行動力與領導企圖心同步上升，適合競爭、創業、品牌推廣與重要提案，但家庭與私人責任會限制擴張速度。</dd></div><div class="row"><dt>財運提醒</dt><dd>進出均衡。</dd></div><div class="row"><dt>健康狀況</dt><dd>維持精神即可。</dd></div><div class="row"><dt>好運方法</dt><dd>提振自信，多參與團體活動，合群、應對得宜；不用接下每一個機會。<br><strong>選對舞台，站穩位置，就能閃耀。</strong></dd></div>
+  </dl>
+</template>
+<template id="tpl-pig">
+  <div class="modal-head" style="--zc:#FF6FA5">
+    <span class="modal-emoji">🐷</span>
+    <div><div class="modal-title" id="modalTitle">屬豬</div><div class="modal-tagline">效率登頂，勞逸要平衡</div></div>
+    <button class="modal-close" data-close aria-label="關閉">✕</button>
+  </div>
+  <dl class="modal-body">
+    <div class="row"><dt>感情運勢</dt><dd>男生別與伴侶冷戰、疏於溝通；女生異性緣旺，有意願就有機會脫單。忙碌時別把疲憊當成感情變淡。</dd></div><div class="row"><dt>工作運勢</dt><dd>心態積極，如魚得水，成果亮眼。進修、教學、國際交流與跨域發展都有新動能，也適合改善流程提高效率；工作量與體力跟不上理想時要留意，努力的方向放在近一點的地方。</dd></div><div class="row"><dt>財運提醒</dt><dd>主動拓展業務就更有收益；工作成果可能帶來收入，也可能增加人力、設備或時間成本。</dd></div><div class="row"><dt>健康狀況</dt><dd>留意過勞、睡眠與運動負荷。週五多留心。</dd></div><div class="row"><dt>好運方法</dt><dd>提振自信，活潑行動、說話風趣，勞逸結合。<br><strong>真正的效率，是讓努力換到值得的成果。</strong></dd></div>
+  </dl>
+</template>
+
+<script>
+(function(){
+  var backdrop = document.getElementById('backdrop');
+  var modal = document.getElementById('modal');
+  var lastFocused = null;
+
+  function openModal(key){
+    var tpl = document.getElementById('tpl-' + key);
+    if(!tpl) return;
+    modal.innerHTML = '';
+    modal.appendChild(tpl.content.cloneNode(true));
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lastFocused = document.activeElement;
+    var closeBtn = modal.querySelector('[data-close]');
+    if(closeBtn) closeBtn.focus();
+  }
+
+  function closeModal(){
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+
+  document.getElementById('zodiacGrid').addEventListener('click', function(e){
+    var btn = e.target.closest('.zodiac-btn');
+    if(btn) openModal(btn.getAttribute('data-target'));
+  });
+
+  modal.addEventListener('click', function(e){
+    if(e.target.closest('[data-close]')) closeModal();
+  });
+
+  backdrop.addEventListener('click', function(e){
+    if(e.target === backdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+})();
+</script>
+</html>
