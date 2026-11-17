@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F4EFE6">
+  <meta name="description" content="5 個問題，看看最近的你。">
+  <title>你現在是哪一種狀態？</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23C44536'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='36' font-family='serif' fill='%23F4EFE6'%3E緣%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #F4EFE6;
+      --paper-2: #EBE4D6;
+      --paper-3: #E2D8C6;
+      --ink: #1C1814;
+      --ink-soft: #6F675C;
+      --ink-faint: #9A9286;
+      --zhu: #C44536;
+      --zhu-deep: #A8362A;
+      --zhu-soft: rgba(196, 69, 54, 0.14);
+      --line: rgba(28, 24, 20, 0.12);
+      --line-strong: rgba(28, 24, 20, 0.22);
+      --shadow: 0 10px 28px rgba(28, 24, 20, 0.06);
+      --font-serif: "Noto Serif TC", "Noto Serif CJK TC", "Source Han Serif TC", "Songti TC", "PMingLiU", serif;
+      --font-sans: "Noto Sans TC", "Noto Sans CJK TC", "Source Han Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --pad-x: clamp(24px, 6.4vw, 36px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      background-color: var(--paper);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.50  0 0 0 0 0.42  0 0 0 0.28 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+        repeating-linear-gradient(90deg, transparent 0 11px, rgba(140, 120, 90, 0.015) 11px 12px),
+        linear-gradient(180deg, #F7F2E9 0%, #F3EEE4 40%, #EFE8DB 100%);
+      background-size: 280px 280px, auto, auto;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    button, a { font-family: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: var(--zhu-soft); color: var(--ink); }
+
+    .wash {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .wash svg { position: absolute; }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      min-height: 100dvh;
+      min-height: 100svh;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .screen.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .frame {
+      width: min(440px, 100%);
+      margin: 0 auto;
+      padding: calc(28px + env(safe-area-inset-top)) var(--pad-x) calc(28px + env(safe-area-inset-bottom));
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Intro */
+    #screen-intro .frame {
+      justify-content: center;
+      min-height: 100%;
+      text-align: center;
+    }
+    .brand-mark {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.42em;
+      color: var(--zhu);
+      margin: 0 0 36px 0.42em;
+    }
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      color: var(--ink-faint);
+    }
+    .ornament .rule {
+      width: 44px;
+      height: 1px;
+      background: var(--line-strong);
+    }
+    .ornament .dot {
+      width: 5px;
+      height: 5px;
+      background: var(--zhu);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px var(--zhu-soft);
+    }
+    .intro-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(30px, 8.4vw, 38px);
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      margin: 0 0 18px;
+      text-wrap: balance;
+    }
+    .intro-title span { display: block; }
+    .intro-sub {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      margin: 0 0 28px;
+    }
+    .intro-note {
+      font-size: 13.5px;
+      line-height: 1.85;
+      color: var(--ink-soft);
+      margin: 0 auto 40px;
+      max-width: 16em;
+    }
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      letter-spacing: 0.22em;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--zhu);
+      outline-offset: 3px;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--zhu);
+      border: 1px solid var(--zhu);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 16px;
+      padding: 13px 48px 13px 56px;
+      min-height: 52px;
+    }
+    @media (hover: hover) {
+      .btn-ghost:hover { background: var(--zhu); color: #F8F2EA; }
+    }
+    .btn-ghost:active { background: var(--zhu-deep); color: #F8F2EA; transform: scale(0.98); }
+
+    .btn-solid {
+      background: var(--zhu);
+      color: #F8F2EA;
+      font-family: var(--font-serif);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 14px 22px;
+      min-height: 52px;
+      width: 100%;
+      letter-spacing: 0.12em;
+    }
+    @media (hover: hover) {
+      .btn-solid:hover { background: var(--zhu-deep); }
+    }
+    .btn-solid:active { transform: scale(0.985); background: var(--zhu-deep); }
+
+    .intro-seal {
+      margin: 48px auto 0;
+      width: 56px;
+      height: 72px;
+      opacity: 0.92;
+    }
+    .footer {
+      margin-top: auto;
+      padding-top: 28px;
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.38em;
+      color: var(--ink-faint);
+    }
+
+    /* Quiz */
+    .quiz-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .progress-label {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      color: var(--ink-soft);
+    }
+    .progress-label em {
+      font-style: normal;
+      color: var(--zhu);
+      font-weight: 500;
+    }
+    .progress-ticks {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .progress-ticks i {
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: var(--paper-3);
+      border-radius: 1px;
+    }
+    .progress-ticks i.is-done,
+    .progress-ticks i.is-now { background: var(--zhu); }
+    .progress-ticks i.is-now { width: 22px; }
+
+    .back-btn {
+      appearance: none;
+      border: 0;
+      background: none;
+      color: var(--ink-faint);
+      font-family: var(--font-serif);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      padding: 8px 0 16px;
+      cursor: pointer;
+      align-self: flex-start;
+      min-height: 44px;
+    }
+    .back-btn[hidden] { display: none; }
+    .back-btn:focus-visible { outline: 2px solid var(--zhu); outline-offset: 2px; }
+
+    .quiz-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .quiz-body.is-leaving {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .question {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(22px, 6.2vw, 26px);
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+      margin: 8px 0 28px;
+      text-wrap: balance;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .option {
+      appearance: none;
+      width: 100%;
+      text-align: left;
+      background: rgba(255, 251, 245, 0.62);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 15.5px;
+      line-height: 1.65;
+      letter-spacing: 0.02em;
+      padding: 16px 18px;
+      min-height: 56px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+    .option::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
+    @media (hover: hover) {
+      .option:hover {
+        border-color: rgba(196, 69, 54, 0.35);
+        background: rgba(255, 251, 245, 0.9);
+      }
+      .option:hover::before { background: var(--zhu); }
+    }
+    .option:focus-visible { outline: 2px solid var(--zhu); outline-offset: 2px; }
+    .option.is-picked,
+    .option:active {
+      border-color: var(--zhu);
+      background: #FBF6EE;
+      transform: scale(0.995);
+    }
+    .option.is-picked::before,
+    .option:active::before { background: var(--zhu); }
+
+    /* Result */
+    #screen-result .frame { padding-top: calc(28px + env(safe-area-inset-top)); }
+    .result-seal {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+    }
+    .result-kicker {
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      color: var(--zhu);
+      margin: 0 0 8px;
+    }
+    .result-title {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(28px, 7.5vw, 34px);
+      letter-spacing: 0.12em;
+      text-align: center;
+      margin: 0 0 18px;
+      line-height: 1.3;
+    }
+    .result-body {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--ink);
+      margin: 0 0 24px;
+      text-wrap: pretty;
+    }
+    .result-body p { margin: 0 0 0.9em; }
+    .result-body p:last-child { margin-bottom: 0; }
+
+    .choices {
+      margin: 0 0 24px;
+      padding: 18px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .choices h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-align: center;
+      margin: 0 0 18px;
+      color: var(--ink);
+    }
+    .choices ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .choices li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--ink);
+      text-wrap: pretty;
+    }
+    .choices li .n {
+      flex: none;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--zhu);
+      width: 1.4em;
+      padding-top: 0.2em;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+    .retry {
+      appearance: none;
+      border: 0;
+      background: none;
+      color: var(--ink-soft);
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      padding: 10px 12px;
+      min-height: 44px;
+      cursor: pointer;
+    }
+    .retry:focus-visible { outline: 2px solid var(--zhu); outline-offset: 2px; }
+    .question:focus, .result-title:focus { outline: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .screen, .quiz-body, .btn, .option { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wash" aria-hidden="true">
+    <svg viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;opacity:0.55">
+      <defs>
+        <filter id="ink" x="-40%" y="-40%" width="180%" height="180%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="7" result="t"/>
+          <feDisplacementMap in="SourceGraphic" in2="t" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+          <feGaussianBlur stdDeviation="10"/>
+        </filter>
+        <radialGradient id="blot1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#1C1814" stop-opacity="0.10"/>
+          <stop offset="55%" stop-color="#1C1814" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#1C1814" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="blot2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#C44536" stop-opacity="0.07"/>
+          <stop offset="100%" stop-color="#C44536" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="320" cy="90" rx="150" ry="120" fill="url(#blot1)" filter="url(#ink)"/>
+      <ellipse cx="40" cy="760" rx="160" ry="130" fill="url(#blot1)" filter="url(#ink)"/>
+      <ellipse cx="300" cy="720" rx="90" ry="70" fill="url(#blot2)" filter="url(#ink)"/>
+    </svg>
+  </div>
+
+  <main class="app">
+    <section id="screen-intro" class="screen is-active" aria-label="引言">
+      <div class="frame">
+        <div class="ornament" aria-hidden="true"><span class="rule"></span><span class="dot"></span><span class="rule"></span></div>
+        <h1 class="intro-title"><span>你現在是</span><span>哪一種狀態？</span></h1>
+        <p class="intro-sub">5 個問題，看看最近的你</p>
+        <div>
+          <button type="button" class="btn btn-ghost" id="btn-start">開始</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-quiz" class="screen" aria-label="測驗">
+      <div class="frame">
+        <div class="quiz-top">
+          <div class="progress-label" id="progress-label" aria-live="polite">1 / 5</div>
+          <div class="progress-ticks" id="progress-ticks" aria-hidden="true"></div>
+        </div>
+        <button type="button" class="back-btn" id="btn-back" hidden>上一題</button>
+        <div class="quiz-body" id="quiz-body">
+          <h1 class="question" id="question-text"></h1>
+          <div class="options" id="options" role="group"></div>
+        </div>
+        <p class="footer">論緣堂</p>
+      </div>
+    </section>
+
+    <section id="screen-result" class="screen" aria-label="結果">
+      <div class="frame">
+        <div class="result-seal" id="result-seal" aria-hidden="true"></div>
+        <p class="result-kicker" id="result-kicker"></p>
+        <h1 class="result-title" id="result-title"></h1>
+        <div class="result-body" id="result-body"></div>
+        <div class="choices">
+          <h2>這一型的你，可以有的選擇</h2>
+          <ol id="result-choices"></ol>
+        </div>
+        <div class="result-actions">
+          <a class="btn btn-solid" id="btn-line" href="https://lin.ee/YxzXyc0">加入 LINE，讓老師幫你看命盤</a>
+          <button type="button" class="retry" id="btn-retry">再測一次</button>
+        </div>
+        <p class="footer">論緣堂</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const QUESTIONS = [
+      {
+        q: "最近一個人安靜下來時，你最常想的是？",
+        options: [
+          { type: "A", text: "明天還有好多事沒做完" },
+          { type: "B", text: "我到底想要什麼？" },
+          { type: "C", text: "某個人最近還好嗎" },
+          { type: "D", text: "我是不是走錯路了" }
+        ]
+      },
+      {
+        q: "週末突然空出一整天，你會？",
+        options: [
+          { type: "A", text: "把待辦清單清一清" },
+          { type: "B", text: "想做很多事，結果滑手機一整天" },
+          { type: "C", text: "約家人朋友，或幫別人處理事情" },
+          { type: "D", text: "一個人去走走，想想事情" }
+        ]
+      },
+      {
+        q: "最近最讓你累的是？",
+        options: [
+          { type: "A", text: "事情太多，停不下來" },
+          { type: "B", text: "想改變，卻遲遲沒有行動" },
+          { type: "C", text: "一直在顧別人的情緒" },
+          { type: "D", text: "做的事情沒有成就感" }
+        ]
+      },
+      {
+        q: "朋友最常說你？",
+        options: [
+          { type: "A", text: "「你也太拚了吧」" },
+          { type: "B", text: "「你想太多了啦」" },
+          { type: "C", text: "「你人真的很好」" },
+          { type: "D", text: "「你好像不太開心」" }
+        ]
+      },
+      {
+        q: "如果有人能回答你一個問題，你最想問？",
+        options: [
+          { type: "A", text: "怎麼做才不會這麼累" },
+          { type: "B", text: "我下一步該往哪裡走" },
+          { type: "C", text: "我能不能也為自己活一點" },
+          { type: "D", text: "我真正適合做什麼" }
+        ]
+      }
+    ];
+
+    const RESULTS = {
+      A: {
+        char: "衝",
+        emoji: "🏃",
+        name: "一直衝型",
+        kicker: "你最近的狀態",
+        paragraphs: [
+          "你很努力，事情一件接一件做，常常累到了才發現好久沒休息。有時候不是不夠拚，而是力氣用在不適合自己的地方。",
+          "想知道你適合的節奏和方向？讓老師從命盤幫你看看。"
+        ],
+        choices: [
+          "今天待辦先只留三件，做完就收工。",
+          "忙完一段之後，先起來走個十分鐘。",
+          "這週找一件能請別人接手的事，自己少扛一些。"
+        ]
+      },
+      B: {
+        char: "轉",
+        emoji: "🌀",
+        name: "原地打轉型",
+        kicker: "你最近的狀態",
+        paragraphs: [
+          "你想改變，也想了很多，但總是不知道第一步該從哪裡開始。想得越多，反而越難動起來。如果能先知道自己適合往哪裡走，第一步就會清楚很多。",
+          "讓老師從命盤幫你看看。"
+        ],
+        choices: [
+          "把腦中反覆出現的想法寫下來，這週只選一件最小的來試。",
+          "跟一個你信任的人說說最近在想什麼，讓念頭先變成一句話。",
+          "先做一件五分鐘內完成的小事，讓自己重新動起來。"
+        ]
+      },
+      C: {
+        char: "顧",
+        emoji: "🤝",
+        name: "照顧別人型",
+        kicker: "你最近的狀態",
+        paragraphs: [
+          "你總是先顧家人、朋友、同事，等想到自己時，已經沒剩多少力氣。你的貼心是優點，但你也值得被好好照顧。",
+          "想知道什麼樣的生活和關係比較適合你？讓老師從命盤幫你看看。"
+        ],
+        choices: [
+          "這週先幫自己空出一個晚上，專程留給自己。",
+          "下次有人開口請你幫忙，先問自己：我現在還有力氣嗎？",
+          "一直由你扛著的一件家事或工作，試著請別人分擔一次。"
+        ]
+      },
+      D: {
+        char: "找",
+        emoji: "🔍",
+        name: "找方向型",
+        kicker: "你最近的狀態",
+        paragraphs: [
+          "你隱約覺得現在的路不太對，但又說不出哪裡不對。這種感覺常常是一個提醒：可能有更適合你的地方。",
+          "想知道你的天賦和適合發展的方向？讓老師從命盤幫你看看。"
+        ],
+        choices: [
+          "回想最近哪一件事做完，你會覺得比較有精神，把它記下來。",
+          "這週留一小時，去做一件你很久想試、卻一直沒開始的事。",
+          "寫下目前最不舒服的兩件事，看看哪一件可以先調整。"
+        ]
+      }
+    };
+
+    const HAN_NUM = ["一", "二", "三"];
+
+    const els = {
+      intro: document.getElementById("screen-intro"),
+      quiz: document.getElementById("screen-quiz"),
+      result: document.getElementById("screen-result"),
+      progressLabel: document.getElementById("progress-label"),
+      progressTicks: document.getElementById("progress-ticks"),
+      back: document.getElementById("btn-back"),
+      body: document.getElementById("quiz-body"),
+      question: document.getElementById("question-text"),
+      options: document.getElementById("options"),
+      seal: document.getElementById("result-seal"),
+      kicker: document.getElementById("result-kicker"),
+      title: document.getElementById("result-title"),
+      resultBody: document.getElementById("result-body"),
+      choices: document.getElementById("result-choices")
+    };
+
+    let answers = [];
+    let index = 0;
+    let locked = false;
+
+    function showScreen(name) {
+      els.intro.classList.toggle("is-active", name === "intro");
+      els.quiz.classList.toggle("is-active", name === "quiz");
+      els.result.classList.toggle("is-active", name === "result");
+    }
+
+    function renderProgress() {
+      els.progressLabel.innerHTML = "<em>" + (index + 1) + "</em> / " + QUESTIONS.length;
+      els.progressTicks.innerHTML = QUESTIONS.map((_, i) => {
+        const cls = i < index ? "is-done" : i === index ? "is-now" : "";
+        return "<i class=\"" + cls + "\"></i>";
+      }).join("");
+    }
+
+    function renderQuestion() {
+      const item = QUESTIONS[index];
+      renderProgress();
+      els.back.hidden = index === 0;
+      els.question.textContent = item.q;
+      els.options.innerHTML = "";
+      item.options.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option";
+        btn.textContent = opt.text;
+        btn.dataset.type = opt.type;
+        if (answers[index] === opt.type) btn.classList.add("is-picked");
+        btn.addEventListener("click", () => choose(opt.type, btn));
+        els.options.appendChild(btn);
+      });
+      /* heading announced via progress aria-live */
+    }
+
+    function choose(type, btn) {
+      if (locked) return;
+      locked = true;
+      Array.from(els.options.children).forEach((el) => el.classList.remove("is-picked"));
+      btn.classList.add("is-picked");
+      answers[index] = type;
+      answers = answers.slice(0, index + 1);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const wait = reduce ? 0 : 280;
+      setTimeout(() => {
+        els.body.classList.add("is-leaving");
+        setTimeout(() => {
+          if (index < QUESTIONS.length - 1) {
+            index += 1;
+            renderQuestion();
+            els.body.classList.remove("is-leaving");
+          } else {
+            showResult();
+            els.body.classList.remove("is-leaving");
+          }
+          locked = false;
+        }, reduce ? 0 : 280);
+      }, wait);
+    }
+
+    function score() {
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach((t) => { counts[t] += 1; });
+      const max = Math.max(counts.A, counts.B, counts.C, counts.D);
+      const tied = ["A", "B", "C", "D"].filter((t) => counts[t] === max);
+      const q5 = answers[4];
+      if (tied.length === 1) return tied[0];
+      if (tied.indexOf(q5) !== -1) return q5;
+      for (let i = answers.length - 1; i >= 0; i--) {
+        if (tied.indexOf(answers[i]) !== -1) return answers[i];
+      }
+      return tied[0];
+    }
+
+    function sealSvg(char) {
+      return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="64" height="64">' +
+        '<rect x="3" y="3" width="58" height="58" fill="#C44536"/>' +
+        '<rect x="7" y="7" width="50" height="50" fill="none" stroke="#F4EFE6" stroke-width="1.2"/>' +
+        '<text x="32" y="46" text-anchor="middle" font-family="Noto Serif TC, Noto Serif CJK TC, serif" font-size="32" fill="#F4EFE6">' + char + "</text>" +
+        "</svg>";
+    }
+
+    function showResult() {
+      const type = score();
+      const data = RESULTS[type];
+      els.seal.innerHTML = sealSvg(data.char);
+      els.kicker.textContent = data.kicker;
+      els.title.textContent = data.emoji + " " + data.name;
+      els.resultBody.innerHTML = data.paragraphs.map((p) => {
+        const safe = p.replace(/[&<>]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+        const tail = safe.slice(-3);
+        const head = safe.slice(0, -3);
+        return "<p>" + head + "<span style=\"white-space:nowrap\">" + tail + "</span></p>";
+      }).join("");
+      els.choices.innerHTML = data.choices.map((c, i) =>
+        "<li><span class=\"n\" aria-hidden=\"true\">" + HAN_NUM[i] + "</span><span>" + c + "</span></li>"
+      ).join("");
+      showScreen("result");
+      els.result.scrollTop = 0;
+    }
+
+    function start() {
+      answers = [];
+      index = 0;
+      locked = false;
+      renderQuestion();
+      showScreen("quiz");
+    }
+
+    function goBack() {
+      if (locked || index === 0) return;
+      index -= 1;
+      els.body.classList.add("is-leaving");
+      setTimeout(() => {
+        renderQuestion();
+        els.body.classList.remove("is-leaving");
+      }, 200);
+    }
+
+    function retry() {
+      answers = [];
+      index = 0;
+      locked = false;
+      showScreen("intro");
+    }
+
+    document.getElementById("btn-start").addEventListener("click", start);
+    document.getElementById("btn-back").addEventListener("click", goBack);
+    document.getElementById("btn-retry").addEventListener("click", retry);
+    els.question.setAttribute("tabindex", "-1");
+    els.title.setAttribute("tabindex", "-1");
+
+    // Preview helper for screenshots: ?preview=intro|question|result&type=A
+    (function preview() {
+      const params = new URLSearchParams(location.search);
+      const mode = params.get("preview");
+      if (!mode) return;
+      if (mode === "question") {
+        const n = Math.max(1, Math.min(5, parseInt(params.get("q") || "1", 10))) - 1;
+        index = n;
+        answers = [];
+        renderQuestion();
+        showScreen("quiz");
+      } else if (mode === "result") {
+        const t = (params.get("type") || "A").toUpperCase();
+        answers = t === "A" ? ["A","A","A","A","A"]
+          : t === "B" ? ["B","B","B","B","B"]
+          : t === "C" ? ["C","C","C","C","C"]
+          : ["D","D","D","D","D"];
+        showResult();
+      }
+    })();
+  </script>
+</body>
+</html>
