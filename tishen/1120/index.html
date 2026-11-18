@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>最近去哪裡最帶財？・解析頁</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2d2d2c;--cream:#f9f5f2;--accent:#c4643c;--muted:#8f8780;--line:#e6dfd8;--green:#06c755}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans TC",system-ui,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+.serif{font-family:"Noto Serif TC",serif}
+em{font-style:normal;color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+/* hero */
+.hero{background:var(--ink);color:#fff;text-align:center;padding:64px 20px 52px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;top:40%;width:260px;height:260px;border:1px solid rgba(255,255,255,.07);border-radius:50%}
+.tagbox{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:7px 16px;font-size:12px;letter-spacing:.32em;color:#d8d2cc;margin-bottom:26px}
+.hero h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(30px,8.6vw,44px);line-height:1.38;letter-spacing:.02em}
+.hero .sub{margin-top:20px;font-size:14px;line-height:1.9;color:#bdb6af;letter-spacing:.08em}
+.brand{margin-top:34px;font-size:12px;letter-spacing:.4em;color:#77716b;font-family:"Noto Serif TC",serif}
+/* choose */
+.choose{padding:48px 0 12px;text-align:center}
+.eyebrow{font-size:11px;letter-spacing:.34em;color:var(--accent)}
+.choose h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;margin:12px 0 14px}
+.choose p{font-size:13.5px;line-height:1.9;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:14px 10px 16px;cursor:pointer;text-align:center;transition:.2s;-webkit-tap-highlight-color:transparent}
+.card .opt{font-size:11px;letter-spacing:.3em;color:var(--muted);margin-bottom:10px}
+.card img{width:100%;max-width:200px;aspect-ratio:4/5;object-fit:cover;display:block;margin:0 auto}
+.card .btn{display:inline-block;margin-top:12px;border:1px solid var(--ink);padding:6px 14px;font-size:12px;letter-spacing:.2em;color:var(--ink);background:#fff;transition:.2s}
+.card.on{border-color:var(--accent);background:#fff7f3}
+.card.on .btn{background:var(--accent);border-color:var(--accent);color:#fff}
+/* result */
+.result{display:none;border-top:1px solid var(--line);margin-top:36px;padding:32px 0 8px}
+.result.show{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rhead{display:flex;gap:16px;align-items:flex-start}
+.rhead>div{flex:1;min-width:0}
+.rsub,.rtitle{overflow-wrap:anywhere}
+body{overflow-x:hidden}
+.rhead img{width:104px;aspect-ratio:4/5;object-fit:cover;flex:none}
+.rlabel{font-size:11px;letter-spacing:.28em;color:var(--accent)}
+.rtitle{font-family:"Noto Serif TC",serif;font-weight:900;font-size:23px;line-height:1.35;margin:8px 0 6px}
+.rsub{font-family:"Noto Serif TC",serif;font-weight:700;font-size:15px;line-height:1.6;color:var(--accent)}
+.meta{display:flex;gap:10px;margin-top:12px;font-size:12.5px;line-height:1.7;align-items:baseline}
+.meta .k{flex:none;color:var(--muted);letter-spacing:.14em;font-size:11.5px}
+.meta .stars{color:var(--accent);letter-spacing:.12em;font-size:16px}
+.meta .v{color:#4a4541}
+.rbody{background:#fff;border:1px solid var(--line);border-radius:3px;padding:24px 20px;margin-top:22px}
+.rbody p{font-size:15px;line-height:1.95;margin-bottom:14px;color:#3a3633}
+.rbody p:last-child{margin-bottom:0}
+.rbody b{color:var(--ink);font-weight:700}
+.rsum{background:var(--ink);color:#fff;padding:20px 20px 22px;margin-top:16px}
+.rsum .k{font-size:11px;letter-spacing:.28em;color:var(--accent);margin-bottom:8px}
+.rsum .t{font-size:14.5px;line-height:1.9;color:#e7e1db}
+.rsum .s{font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;line-height:1.7;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
+.racts{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.racts a{border:1px solid var(--line);background:#fff;padding:9px 14px;font-size:12.5px;letter-spacing:.14em;color:var(--ink);text-decoration:none}
+/* footer */
+.foot{background:var(--ink);color:#fff;text-align:center;padding:56px 20px 44px;margin-top:48px}
+.foot h3{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px}
+.foot h4{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;color:var(--accent);margin-top:6px}
+.line{display:inline-block;margin-top:28px;background:var(--green);color:#fff;text-decoration:none;padding:14px 30px;font-size:14px;letter-spacing:.16em;font-weight:500;border-radius:2px}
+.foot .brand{margin-top:26px}
+/* float */
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;z-index:9}
+.fab button{width:38px;height:38px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:15px;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer}
+@media (min-width:640px){.grid{gap:16px}.rhead>div{flex:1;min-width:0}
+.rsub,.rtitle{overflow-wrap:anywhere}
+body{overflow-x:hidden}
+.rhead img{width:150px}.rtitle{font-size:27px}.hero{padding:84px 20px 64px}}
+</style></head>
+<body>
+<header class="hero" id="top">
+  <div class="tagbox" id="tag"></div>
+  <h1 id="h1"></h1>
+  <div class="sub" id="sub"></div>
+  <div class="brand" id="brand1"></div>
+</header>
+<main class="wrap">
+  <section class="choose" id="choose">
+    <div class="eyebrow">CHOOSE YOUR CARD</div>
+    <h2>憑<em>第一直覺</em>選一張牌</h2>
+    <p id="q"></p><p id="hint"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section class="result" id="result"></section>
+</main>
+<footer class="foot" id="book">
+  <h3>加入官方Line</h3><h4>預約專屬個人解析</h4>
+  <a class="line" id="line" target="_blank" rel="noopener">✦ 論緣堂官方LINE</a>
+  <div class="brand" id="brand2"></div>
+</footer>
+<div class="fab"><button aria-label="上" onclick="scrollTo({top:0})">↑</button><button aria-label="下" onclick="scrollTo({top:document.body.scrollHeight})">↓</button></div>
+<script id="data" type="application/json">{"slug":"1120","date":"2026-11-20","page_title":"最近去哪裡最帶財？・解析頁","series":"財富系列","type_label":"大眾占卜","headline":"最近去哪裡最帶財？","headline_break_after":"最近去哪裡","keyword":"帶財","subtitle":"財氣不一定藏在很遠的地方","brand":"論緣堂 msjtwoo","question":"看看最近哪個地方最容易幫妳 / 你沾到財氣","pick_hint":"點選你在輪播中選的那張牌","result_short_label":"財氣","line_url":"https://lin.ee/YxzXyc0","cards":[{"title":"財藏人脈，守財不易","subtitle":"熟悉的地方有機會，但別讓錢從手中溜走","meta_label":"財氣地點","meta_value":"商務中心、公司周邊、熟悉的店家、既有客戶常出沒的場所","body":["**這組的財氣，藏在你原本就擁有的人脈與資源裡。**","最近不一定要特別跑去陌生的地方找機會，反而是平常工作的環境、經常拜訪的店家，或是過去合作過的客戶，都可能帶來新的財路。","例如在公司附近吃飯時，剛好遇到以前的合作夥伴；或是原本很久沒聯絡的客戶，突然想起你，主動詢問新的合作。","但這組最大的問題是，**看起來有機會賺錢，實際上卻不一定能把錢留下來。**","可能是熟人介紹的案子，最後因為人情壓力不好意思收費；也可能是合作談得很順利，真正要執行時，才發現利潤沒有想像中好。","甚至有些原本看起來很有規模的計畫，最後沒有真正發展起來。","所以這個月與其一直尋找新機會，不如先把手上已經擁有的資源重新整理。"],"summary_label":"開財指引","summary":"多走動熟悉的商業圈，重新聯繫舊客戶，但涉及報價、分潤與合作條件時，一定要先談清楚。","summary_strong":"真正能幫你開財的，不是認識多少人，而是能不能把既有的人脈轉換成實際收入。","img":"img/card1.jpg"},{"title":"桃花帶路，財氣未穩","subtitle":"熱鬧的地方有機會，但別讓情緒替你做決定","meta_label":"財氣地點","meta_value":"早午餐店、咖啡廳、朋友聚會、婚禮與喜慶場合","body":["**最近的財氣，可能來自一次讓你感到開心的人際互動。**","例如朋友臨時約你吃飯、參加婚禮，或是透過聚會認識新的朋友，都有機會接觸到原本生活圈以外的資源。","甚至可能有人主動提出合作、介紹客戶，或分享一個讓你很感興趣的賺錢機會。","不過，這組最需要注意的是，**最近容易因為情緒、好感或一時的興奮，而影響自己的判斷。**","例如剛認識一個聊得很投緣的人，就覺得對方很值得信任；或是朋友提出合作邀請，明明還沒有了解實際內容，就因為不好意思拒絕而答應。","也可能原本只是出門吃頓飯，最後因為購物、聚餐或人情往來，花了比預期更多的錢。","所以這組雖然有認識新朋友、接觸新機會的可能，但目前仍然需要時間培養。","**有好感，不代表有好結果；聊得開心，也不代表一定能一起賺錢。**"],"summary_label":"開財指引","summary":"最近可以多接受朋友邀約，但不要在情緒高漲的時候做財務決定。遇到合作機會，至少先確認成本、分工與實際收益。","summary_strong":"財氣可能從人際關係開始，但能不能留下來，取決於你是否保持清醒。","img":"img/card2.jpg"},{"title":"貴人指路，財路未成","subtitle":"多接近有經驗的人，但別把希望全寄託在別人身上","meta_label":"財氣地點","meta_value":"專業講座、進修課程、書店、文化展覽、長輩與前輩聚會","body":["**這組最容易帶來財氣的地方，是能夠接觸專業知識、人生經驗，以及有能力提供協助的人的場所。**","最近很適合參加講座、進修課程，或是主動拜訪有經驗的前輩。","也可能是在書店、美術館、文化活動中，因為一次交流而得到新的啟發。","你可能會遇到一個很願意照顧你的人。","對方不只願意分享經驗，甚至會替你分析問題、介紹資源，或幫你思考接下來應該怎麼走。","但這組的特點是，**你可能想得很多、考慮得很周全，最後卻不一定真的做得成。**","例如一個合作機會，雙方討論了很久，也覺得方向不錯，但因為條件始終談不攏，最後不了了之。","或者有長輩願意提供幫助，但真正執行時，才發現資金、人力或時機都還沒有準備好。","另外，你也可能因為太願意照顧別人，花了很多時間幫忙解決問題，卻沒有真正替自己創造收入。"],"summary_label":"開財指引","summary":"多向有經驗的人請教，但聽完建議之後，要替自己設定具體的行動與期限。不要讓一個好機會永遠停留在討論階段。","summary_strong":"貴人可以替你指路，但能不能走出一條財路，最後還是要靠自己。","img":"img/card3.jpg"},{"title":"專業藏財，動中見機","subtitle":"走進能展現能力的地方，才容易遇見新的財路","meta_label":"財氣地點","meta_value":"產業展覽、專業交流會、工作坊、商務聚會、技術與知識型活動","body":["**這組的財氣，來自你本身擁有的專業能力，只是目前可能還沒有找到最適合發揮的地方。**","你可能很清楚自己擅長什麼，也累積了一定的經驗，但最近總覺得能力沒有被看見，或是明明做了很多，收入卻沒有跟著增加。","所以比起單純去熱鬧的地方走走，這組更適合前往能夠展現專業、接觸潛在客戶的場所。","例如參加產業展覽、專業交流活動，或是朋友臨時邀請的商務聚會。","可能只是一次簡單的自我介紹，就讓別人發現你的專長；也可能在交流過程中，突然有人提出合作邀請。","不過，這組要特別注意的是，**機會可能來得很突然，但也容易因為太急而出現問題。**","例如對方當場提出合作，你因為很想把握機會，還沒確認工作內容就答應。","或是太急著證明自己的能力，反而把原本可以好好談的事情弄得緊張。","甚至可能因為一時衝動，做出不符合自己專業價值的決定。","所以這組不是沒有財氣，而是**專業能力需要找到正確的舞台，才能真正轉換成收入。**"],"summary_label":"開財指引","summary":"最近多參加與自己專業相關的活動，主動讓別人知道你能解決什麼問題。但機會出現時，不要急著成交，先確認合作條件與自己的承接能力。","summary_strong":"你不需要一直尋找新的賺錢方法，有時候真正值錢的，就是你早已累積的能力。","img":"img/card4.jpg"}]}</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const rich=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+const hl=(s,k)=>k?s.split(k).join('<em>'+k+'</em>'):s;
+const $=id=>document.getElementById(id);
+$('tag').textContent=`${D.type_label} · ${D.series}`;
+let h=esc(D.headline);if(D.headline_break_after)h=h.replace(esc(D.headline_break_after),esc(D.headline_break_after)+'<br>');
+$('h1').innerHTML=hl(h,esc(D.keyword));
+$('sub').innerHTML=rich(D.subtitle);
+$('brand1').textContent=$('brand2').textContent=D.brand;
+$('q').innerHTML=rich(D.question);$('hint').textContent=D.pick_hint;
+$('line').href=D.line_url;
+$('grid').innerHTML=D.cards.map((c,i)=>`<div class="card" data-i="${i}" role="button" tabindex="0"><div class="opt">選項 ${i+1}</div><img src="${esc(c.img)}" alt="選項 ${i+1}" loading="lazy"><span class="btn">查看解析</span></div>`).join('');
+function pick(i,scroll){
+  document.querySelectorAll('.card').forEach(el=>el.classList.toggle('on',+el.dataset.i===i));
+  const c=D.cards[i],r=$('result');
+  const meta=c.rating!=null?`<span class="stars">${'★'.repeat(c.rating)}${'☆'.repeat(5-c.rating)}</span><span class="v">${c.rating}/5</span>`:`<span class="v">${rich(c.meta_value)}</span>`;
+  r.innerHTML=`<div class="rhead"><img src="${esc(c.img)}" alt=""><div>
+    <div class="rlabel">CARD 0${i+1} · ${esc(D.result_short_label)}解析</div>
+    <div class="rtitle">${rich(c.title)}</div><div class="rsub">${rich(c.subtitle)}</div>
+    <div class="meta"><span class="k">${esc(c.meta_label)}</span>${meta}</div></div></div>
+    <div class="rbody">${c.body.map(p=>`<p>${rich(p)}</p>`).join('')}</div>
+    <div class="rsum">${c.summary_label?`<div class="k">${esc(c.summary_label)}</div>`:''}${c.summary?`<div class="t">${rich(c.summary)}</div>`:''}${c.summary_strong?`<div class="s">${rich(c.summary_strong)}</div>`:''}</div>
+    <div class="racts"><a href="#choose">↑ 重新選牌</a><a href="#book">預約個人解析 ↓</a></div>`;
+  r.classList.add('show');
+  if(scroll)r.scrollIntoView({behavior:'smooth',block:'start'});
+  history.replaceState(null,'','#card'+(i+1));
+}
+document.querySelectorAll('.card').forEach(el=>{el.onclick=()=>pick(+el.dataset.i,true);el.onkeydown=e=>{if(e.key==='Enter')pick(+el.dataset.i,true)}});
+const m=location.hash.match(/^#card([1-4])$/);if(m)pick(+m[1]-1,false);
+</script></body></html>
