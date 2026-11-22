@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F6F0E4">
+  <title>論緣堂｜二十四字心籤</title>
+  <meta name="description" content="論緣堂二十四字心籤，選一個數字，看看這支心籤想對你說的話。">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="page">
+    <img class="brocade" src="assets/img/brocade-top.webp" alt="">
+
+    <main id="view-home" class="view wrap">
+      <header class="brand">
+        <div class="brand-kicker">論緣堂</div>
+        <h1>二十四字心籤</h1>
+      </header>
+      <hr class="gold-line" style="margin:12px 40px 0">
+      <p class="lead">選一個你看見的數字，<br>看看這支心籤想對你說的話。</p>
+
+      <form id="lot-form" class="picker">
+        <input id="lot-input" type="number" inputmode="numeric" min="1" max="24" placeholder="輸入籤號 1–24" aria-label="輸入籤號">
+        <button class="btn btn-primary" type="submit">查看</button>
+      </form>
+      <p id="lot-error" class="error" role="status"></p>
+
+      <p class="subhead">也可以直接點選</p>
+      <div id="lot-grid" class="grid"></div>
+
+      <button id="draw-btn" class="btn btn-gold btn-block draw-btn" type="button">為我抽出一支</button>
+      <p class="foot">內容僅供心靈參考</p>
+    </main>
+
+    <article id="view-result" class="view wrap">
+      <div class="topbar">
+        <button id="back-btn" class="back" type="button">← 再看其他籤</button>
+      </div>
+      <p class="brand-kicker result-brand">論緣堂｜二十四字心籤</p>
+      <p id="lot-no" class="lot-no"></p>
+      <div id="lot-char" class="lot-char"></div>
+      <div class="rule"></div>
+      <p id="lot-verse" class="verse"></p>
+
+      <section class="deity-card" id="deity-card">
+        <img id="deity-img" alt="">
+        <h2 id="deity-name" class="deity-name"></h2>
+      </section>
+
+      <section class="section">
+        <h2>生活指引</h2>
+        <div class="guide">
+          <h3>家庭</h3>
+          <p id="g-family"></p>
+        </div>
+        <div class="guide">
+          <h3>關係</h3>
+          <p id="g-relation"></p>
+        </div>
+        <div class="guide">
+          <h3>自身</h3>
+          <p id="g-self"></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>本尊智慧提點</h2>
+        <p id="wisdom" class="wisdom"></p>
+      </section>
+
+      <section class="section">
+        <h2>這週可以做的一件小事</h2>
+        <p id="weekly" class="weekly"></p>
+      </section>
+
+      <section class="section">
+        <h2>對應水晶</h2>
+        <p id="crystal-name" class="crystal-name"></p>
+        <p id="crystal-cat" class="crystal-cat"></p>
+        <p id="crystal-text" class="crystal-text"></p>
+        <a id="crystal-link" class="btn btn-ghost btn-block" href="#" target="_blank" rel="noopener noreferrer">看緣拾相關水晶</a>
+      </section>
+
+      <div class="actions">
+        <a class="btn btn-line" href="https://lin.ee/YxzXyc0" target="_blank" rel="noopener noreferrer">找老師聊聊你的情況</a>
+        <div class="row2">
+          <button id="copy-btn" class="btn btn-ghost" type="button">複製分享</button>
+          <button id="again-btn" class="btn btn-ghost" type="button">再看其他籤</button>
+        </div>
+      </div>
+      <p class="foot">內容僅供心靈參考</p>
+    </article>
+
+    <hr class="gold-line">
+    <img class="brocade bottom" src="assets/img/brocade-bottom.webp" alt="">
+  </div>
+
+  <div id="draw-overlay" class="overlay" aria-hidden="true">
+    <div id="spin-char" class="spin-char">籤</div>
+    <p>心籤為你抽出</p>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="assets/lots.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
