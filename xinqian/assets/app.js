@@ -128,6 +128,7 @@
     $("crystal-cat").textContent = lot.category;
     $("crystal-text").textContent = lot.crystal_text;
     $("crystal-link").href = lot.collection_url;
+    $("crystal-link").textContent = "你可能需要的緣拾是…";
 
     $("copy-btn").onclick = function () {
       const lines = [

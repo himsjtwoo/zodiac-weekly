@@ -185,6 +185,16 @@ a { color: var(--vermilion); }
   width: 100%;
 }
 .btn-ghost:hover { background: rgba(196,161,90,0.12); }
+.btn-yuan {
+  background: #FFF8EC;
+  color: var(--burgundy);
+  border: 1px solid var(--gold);
+  width: 100%;
+  padding: 14px 16px;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 0 rgba(196,161,90,0.25);
+}
+.btn-yuan:hover { background: #FFF1D6; }
 .btn-block { width: 100%; }
 
 .subhead {
