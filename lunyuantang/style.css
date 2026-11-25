@@ -9,7 +9,9 @@
   --ochre-deep:#6b4320;
   --gold:#b8955a;       /* 金色線條 */
   --pine:#5f6b3a;       /* 松綠 */
-  --seal:#b5302a;       /* 朱印紅 */
+  --seal:#b5302a;       /* 朱印紅（logo 印章） */
+  --brick:#8b2e24;      /* 深磚紅：論緣堂品牌色 */
+  --brick-deep:#6e2219;
   --line:#06c755;       /* LINE 綠（只用在小圖示） */
   --radius:4px;
   --serif:"Noto Serif TC","Noto Serif CJK TC","Songti TC",serif;
@@ -26,7 +28,7 @@ a{color:inherit}
 
 /* ---------- 頂部（固定） ---------- */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(238,240,220,.94);backdrop-filter:blur(6px);
-  border-bottom:1px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 18px}
+  border-bottom:2px solid var(--brick);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 18px}
 .brand{display:flex;align-items:center;text-decoration:none;min-height:44px}
 .brand .logo-img{height:62px;width:auto;mix-blend-mode:multiply}
 .brand .logo-text{display:none;font-family:var(--serif);font-weight:900;font-size:28px;letter-spacing:.14em;align-items:center;gap:8px}
@@ -34,13 +36,13 @@ a{color:inherit}
 .seal{display:inline-grid;place-items:center;width:24px;height:24px;background:var(--seal);color:#f4ecd8;font-size:13px;border-radius:3px;letter-spacing:0;line-height:1}
 
 /* ---------- LINE 按鈕 ---------- */
-.btn-line{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#f4ecd8;
+.btn-line{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brick);color:#fff;
   text-decoration:none;font-weight:700;border-radius:999px;padding:9px 18px;font-size:15px;white-space:nowrap;
-  border:1px solid var(--gold);letter-spacing:.04em}
+  border:1px solid var(--brick-deep);letter-spacing:.04em;box-shadow:0 2px 0 var(--brick-deep)}
 .btn-line svg{width:20px;height:20px;flex:none}
 .btn-line svg path:first-child{fill:var(--line)}
 .btn-line svg path:last-child{fill:#fff}
-.btn-line.big{font-size:18px;padding:16px 28px;width:100%;max-width:420px;background:var(--ochre-deep)}
+.btn-line.big{font-size:18px;padding:16px 28px;width:100%;max-width:420px}
 .float-line{position:fixed;right:14px;bottom:18px;z-index:60;padding:12px 16px;box-shadow:0 6px 18px rgba(31,27,22,.3)}
 
 /* ---------- 主視覺 ---------- */
@@ -54,28 +56,28 @@ a{color:inherit}
 .hero-art img{border-radius:2px;box-shadow:0 0 0 1px var(--gold),0 0 0 6px var(--paper-2),0 0 0 7px var(--gold)}
 .topic-hero{padding-top:44px}
 .topic-hero h1{font-size:clamp(34px,10vw,76px);letter-spacing:.06em}
-.topic-hero .tag{display:inline-block;color:var(--seal);font-family:var(--serif);font-weight:900;border:1px solid var(--seal);
+.topic-hero .tag{display:inline-block;color:var(--brick);font-family:var(--serif);font-weight:900;border:1px solid var(--brick);
   border-radius:3px;padding:0 10px;font-size:15px;margin-bottom:12px;letter-spacing:.1em}
 
 /* ---------- 分隔線（金線＋菱形） ---------- */
 .divider{display:flex;align-items:center;gap:14px;max-width:520px;margin:6px auto 0;padding:0 24px}
 .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--gold)}
-.divider span{width:9px;height:9px;transform:rotate(45deg);border:1px solid var(--ochre);background:var(--seal)}
+.divider span{width:10px;height:10px;transform:rotate(45deg);border:1px solid var(--gold);background:var(--brick)}
 
 /* ---------- 內容區 ---------- */
 main{max-width:720px;margin:0 auto;padding:8px 22px 48px}
 section{margin:40px 0}
-h2{font-family:var(--serif);font-weight:900;font-size:26px;line-height:1.4;margin:0 0 14px;color:var(--ink);
+h2{font-family:var(--serif);font-weight:900;font-size:26px;line-height:1.4;margin:0 0 14px;color:var(--brick);
   display:flex;align-items:center;gap:12px;letter-spacing:.06em}
-h2::before{content:"";width:4px;height:24px;background:var(--seal);flex:none}
+h2::before{content:"";width:4px;height:24px;background:var(--brick);flex:none}
 .panel{background:var(--paper-2);border-radius:var(--radius);padding:22px 22px;border:1px solid rgba(184,149,90,.55)}
 .ask-list{list-style:none;margin:0;padding:6px 22px}
 .ask-list li{padding:13px 0 13px 26px;position:relative;border-bottom:1px solid rgba(184,149,90,.4)}
 .ask-list li:last-child{border-bottom:0}
-.ask-list li::before{content:"";position:absolute;left:2px;top:24px;width:8px;height:8px;transform:rotate(45deg);background:var(--ochre)}
+.ask-list li::before{content:"";position:absolute;left:2px;top:24px;width:8px;height:8px;transform:rotate(45deg);background:var(--brick)}
 .get{border-left:4px solid var(--gold)}
 .get p{margin:0}
-.back{display:inline-block;margin-top:18px;font-size:15px;color:var(--ochre-deep);text-decoration:none;font-weight:700}
+.back{display:inline-block;margin-top:18px;font-size:15px;color:var(--brick);text-decoration:none;font-weight:700}
 
 /* ---------- 首頁服務格 ---------- */
 .grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -84,18 +86,18 @@ h2::before{content:"";width:4px;height:24px;background:var(--seal);flex:none}
 .svc:hover{transform:translateY(-2px)}
 .svc .letter{flex:none;width:38px;height:38px;border-radius:3px;display:grid;place-items:center;font-family:var(--serif);
   font-weight:900;font-size:19px;border:1px solid var(--ochre);color:var(--ochre-deep)}
-.svc.main{border-color:var(--ochre)}
-.svc.main .letter{background:var(--seal);border-color:var(--seal);color:#f4ecd8}
+.svc.main{border-color:var(--brick)}
+.svc.main .letter{background:var(--brick);border-color:var(--brick);color:#f4ecd8}
 .svc h3{margin:0;font-family:var(--serif);font-size:20px;line-height:1.45}
 .svc p{margin:4px 0 0;font-size:15px;color:var(--ink-soft)}
-.svc .more{display:inline-block;margin-top:6px;font-size:14px;font-weight:700;color:var(--ochre-deep)}
+.svc .more{display:inline-block;margin-top:6px;font-size:14px;font-weight:700;color:var(--brick)}
 
 /* ---------- 頁尾 LINE 區（每頁都有） ---------- */
-.line-cta{background:var(--ink);color:#f4ecd8;text-align:center;padding:48px 22px 40px;margin:0;border-top:3px double var(--gold)}
+.line-cta{background:var(--ink);color:#f4ecd8;text-align:center;padding:48px 22px 40px;margin:0;border-top:6px solid var(--brick)}
 .line-cta h2{color:#f4ecd8;justify-content:center;font-size:clamp(24px,7vw,34px)}
 .line-cta h2::before{display:none}
 .line-cta p{max-width:30em;margin:0 auto 24px;color:#cfc6b2}
-.line-cta .btn-line.big{background:var(--ochre)}
+.line-cta .btn-line.big{background:var(--brick);border-color:var(--gold)}
 .site-footer{background:var(--ink);color:#8f8573;text-align:center;font-size:13px;padding:6px 16px 90px;border-top:1px solid #3a332a}
 
 /* ---------- 桌機 ---------- */
@@ -110,3 +112,9 @@ h2::before{content:"";width:4px;height:24px;background:var(--seal);flex:none}
   .site-header{padding:10px 32px}
   .brand .logo-img{height:76px}
 }
+
+/* ---------- 深磚紅：頂部 BAR、LINE 按鈕、最下方 ---------- */
+.site-header{background:var(--brick);border-bottom:3px solid var(--gold)}
+.brand{background:#f4efdc;border-radius:6px;padding:3px 10px}
+.site-header .btn-line{background:var(--brick-deep);border-color:#f4ecd8;box-shadow:none}
+.site-footer{background:var(--brick);color:#f4e3d6;border-top:0}
