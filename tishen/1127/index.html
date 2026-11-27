@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>今年最後一個月，你準備好了嗎？・解析頁</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2d2d2c;--cream:#f9f5f2;--accent:#c4643c;--muted:#8f8780;--line:#e6dfd8;--green:#06c755}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans TC",system-ui,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+.serif{font-family:"Noto Serif TC",serif}
+em{font-style:normal;color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+/* hero */
+.hero{background:var(--ink);color:#fff;text-align:center;padding:64px 20px 52px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;top:40%;width:260px;height:260px;border:1px solid rgba(255,255,255,.07);border-radius:50%}
+.tagbox{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:7px 16px;font-size:12px;letter-spacing:.32em;color:#d8d2cc;margin-bottom:26px}
+.hero h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(30px,8.6vw,44px);line-height:1.38;letter-spacing:.02em}
+.hero .sub{margin-top:20px;font-size:14px;line-height:1.9;color:#bdb6af;letter-spacing:.08em}
+.brand{margin-top:34px;font-size:12px;letter-spacing:.4em;color:#77716b;font-family:"Noto Serif TC",serif}
+/* choose */
+.choose{padding:48px 0 12px;text-align:center}
+.eyebrow{font-size:11px;letter-spacing:.34em;color:var(--accent)}
+.choose h2{font-family:"Noto Serif TC",serif;font-weight:700;font-size:24px;margin:12px 0 14px}
+.choose p{font-size:13.5px;line-height:1.9;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.card{background:#fff;border:1px solid var(--line);border-radius:3px;padding:14px 10px 16px;cursor:pointer;text-align:center;transition:.2s;-webkit-tap-highlight-color:transparent}
+.card .opt{font-size:11px;letter-spacing:.3em;color:var(--muted);margin-bottom:10px}
+.card img{width:100%;max-width:200px;aspect-ratio:4/5;object-fit:cover;display:block;margin:0 auto}
+.card .btn{display:inline-block;margin-top:12px;border:1px solid var(--ink);padding:6px 14px;font-size:12px;letter-spacing:.2em;color:var(--ink);background:#fff;transition:.2s}
+.card.on{border-color:var(--accent);background:#fff7f3}
+.card.on .btn{background:var(--accent);border-color:var(--accent);color:#fff}
+/* result */
+.result{display:none;border-top:1px solid var(--line);margin-top:36px;padding:32px 0 8px}
+.result.show{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rhead{display:flex;gap:16px;align-items:flex-start}
+.rhead>div{flex:1;min-width:0}
+.rsub,.rtitle{overflow-wrap:anywhere}
+body{overflow-x:hidden}
+.rhead img{width:104px;aspect-ratio:4/5;object-fit:cover;flex:none}
+.rlabel{font-size:11px;letter-spacing:.28em;color:var(--accent)}
+.rtitle{font-family:"Noto Serif TC",serif;font-weight:900;font-size:23px;line-height:1.35;margin:8px 0 6px}
+.rsub{font-family:"Noto Serif TC",serif;font-weight:700;font-size:15px;line-height:1.6;color:var(--accent)}
+.meta{display:flex;gap:10px;margin-top:12px;font-size:12.5px;line-height:1.7;align-items:baseline}
+.meta .k{flex:none;color:var(--muted);letter-spacing:.14em;font-size:11.5px}
+.meta .stars{color:var(--accent);letter-spacing:.12em;font-size:16px}
+.meta .v{color:#4a4541}
+.rbody{background:#fff;border:1px solid var(--line);border-radius:3px;padding:24px 20px;margin-top:22px}
+.rbody p{font-size:15px;line-height:1.95;margin-bottom:14px;color:#3a3633}
+.rbody p:last-child{margin-bottom:0}
+.rbody b{color:var(--ink);font-weight:700}
+.rsum{background:var(--ink);color:#fff;padding:20px 20px 22px;margin-top:16px}
+.rsum .k{font-size:11px;letter-spacing:.28em;color:var(--accent);margin-bottom:8px}
+.rsum .t{font-size:14.5px;line-height:1.9;color:#e7e1db}
+.rsum .s{font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;line-height:1.7;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
+.racts{display:flex;justify-content:space-between;margin-top:22px;gap:10px}
+.racts a{border:1px solid var(--line);background:#fff;padding:9px 14px;font-size:12.5px;letter-spacing:.14em;color:var(--ink);text-decoration:none}
+/* footer */
+.foot{background:var(--ink);color:#fff;text-align:center;padding:56px 20px 44px;margin-top:48px}
+.foot h3{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px}
+.foot h4{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;color:var(--accent);margin-top:6px}
+.line{display:inline-block;margin-top:28px;background:var(--green);color:#fff;text-decoration:none;padding:14px 30px;font-size:14px;letter-spacing:.16em;font-weight:500;border-radius:2px}
+.foot .brand{margin-top:26px}
+/* float */
+.fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;z-index:9}
+.fab button{width:38px;height:38px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:15px;box-shadow:0 3px 10px rgba(0,0,0,.25);cursor:pointer}
+@media (min-width:640px){.grid{gap:16px}.rhead>div{flex:1;min-width:0}
+.rsub,.rtitle{overflow-wrap:anywhere}
+body{overflow-x:hidden}
+.rhead img{width:150px}.rtitle{font-size:27px}.hero{padding:84px 20px 64px}}
+</style></head>
+<body>
+<header class="hero" id="top">
+  <div class="tagbox" id="tag"></div>
+  <h1 id="h1"></h1>
+  <div class="sub" id="sub"></div>
+  <div class="brand" id="brand1"></div>
+</header>
+<main class="wrap">
+  <section class="choose" id="choose">
+    <div class="eyebrow">CHOOSE YOUR CARD</div>
+    <h2>憑<em>第一直覺</em>選一張牌</h2>
+    <p id="q"></p><p id="hint"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section class="result" id="result"></section>
+</main>
+<footer class="foot" id="book">
+  <h3>加入官方Line</h3><h4>預約專屬個人解析</h4>
+  <a class="line" id="line" target="_blank" rel="noopener">✦ 論緣堂官方LINE</a>
+  <div class="brand" id="brand2"></div>
+</footer>
+<div class="fab"><button aria-label="上" onclick="scrollTo({top:0})">↑</button><button aria-label="下" onclick="scrollTo({top:document.body.scrollHeight})">↓</button></div>
+<script id="data" type="application/json">{"slug":"1127","date":"2026-11-27","page_title":"今年最後一個月，你準備好了嗎？・解析頁","series":"12 月","type_label":"大眾占卜","headline":"今年最後一個月你準備好了嗎？","headline_break_after":"今年最後一個月","keyword":"","subtitle":"今年發生的事情\n其實都還在影響你\n有些已經結束\n有些還沒有真正放下","brand":"論緣堂 msjtwoo","question":"選一張最有感覺的牌","pick_hint":"點選你在輪播中選的那張牌","result_short_label":"12 月","line_url":"https://lin.ee/y6Pv4v8","cards":[{"title":"方向未定，貴人引路","subtitle":"不必急著找到答案，新的可能正在醞釀","meta_label":"12 月關鍵字","meta_value":"重新定位、貴人協助、新的契機","body":["七殺倒牌＋天鉞＋胎","這個月可能會對原本堅持的事情產生動搖。","過去很確定自己想要什麼，也有一個努力的方向，但到了年底，卻開始懷疑繼續走下去是不是自己真正想要的。可能是工作上的目標、經營已久的感情，或是原本對未來的規劃，突然覺得沒有那麼篤定了。","不過，這個月有機會遇到願意提供協助的人，尤其可能是一位女性同事、朋友、主管或長輩。可能是一次談話、一個邀約，或是有人提出不同的建議，讓你開始看見另一種可能性。","例如年底和朋友吃飯時，對方剛好提到明年有一個合作、職缺或課程，問你有沒有興趣；或是主管私下透露，明年想交給你一個新的任務。這個新的方向目前還在萌芽階段，未必能立刻看見成果，也不需要急著做出決定。","但這組最需要注意的是，新的可能性還很脆弱。例如因為太想替自己找到出口，細節還沒談好，就先跟身邊的人宣布要轉換跑道。也可能一時心急，把原本的工作或關係直接放掉，新的機會卻還沒真正成形。甚至為了證明自己還是對的，硬撐著把年底目標衝完，結果把力氣耗在已經不想要的方向上。","12 月可能發生的事： 接觸新的工作方向、收到他人的邀約或協助，重新思考明年的生活規劃。"],"summary_label":"年末收尾指引","summary":"不必為了證明過去的選擇是對的，就繼續堅持一個已經不適合自己的方向。有人主動給你建議或機會時，先好好聽；新的計畫在細節確定之前，先別跟太多人說。","summary_strong":"今年不一定要以一個完美的結果結束，也可以帶著一個新的可能性，走進明年。","img":"img/card1.jpg"},{"title":"放下執念，止住消耗","subtitle":"不再勉強掌控，反而有機會迎來好轉","meta_label":"12 月關鍵字","meta_value":"放下控制、重新衡量、止跌回穩","body":["武曲倒牌＋化權倒牌＋衰倒牌","這個月可能會發現，有些事情已經不是努力就能夠掌控的。","原本習慣用理性、效率或實際成果來衡量一件事，但最近可能更容易受到情緒、人情或個人感受的影響，做出與過去不同的選擇。工作上可能不再那麼堅持自己的做法；金錢上可能因為人情而有所妥協；感情上也可能逐漸放下想要掌握關係走向的念頭。","這種失去掌控的感覺，不見得是一件壞事。有些持續消耗你的事情，反而可能因為不再強求，而逐漸停止惡化。原本停滯的工作、低迷的心情，或是一段讓人疲憊的關係，都有機會慢慢回到比較平穩的狀態，但還不代表已經完全恢復。","但這組最需要注意的是，人情和情緒很容易在年底影響你的荷包。例如尾牙、聚餐、送禮一個接一個，每次花錢都覺得還好，月底一看帳單才發現超出很多。也可能朋友開口借錢或找你合作，你因為不好意思拒絕就答應了。甚至想在年底前把今年的損失補回來，就答應一筆沒有算清楚的投資。","12 月可能發生的事： 重新調整財務安排、放下部分責任、改變合作方式，或是原本不順利的事情出現緩和的跡象。"],"summary_label":"年末收尾指引","summary":"重新檢視哪些事情值得繼續投入，哪些只是因為不甘心，所以遲遲不願意放手。遇到要花錢、要答應別人的事，先把成本算過再回覆，替年底的花費設一個上限。","summary_strong":"今年最後一個月，不一定要再多得到什麼，能夠停止不必要的消耗，本身就是一種收穫。","img":"img/card2.jpg"},{"title":"慾望未減，新的篇章","subtitle":"機會正在增加，但別讓野心超過自己的能力","meta_label":"12 月關鍵字","meta_value":"慾望擴張、突破限制、新局展開","body":["紫微貪狼倒牌＋天刑倒牌＋長生","這個月可能會突然對很多事情產生興趣，也開始對明年有更多的期待。","想賺更多錢、想認識更多人、想拓展事業，甚至想要改變自己的生活方式。原本限制自己的一些規則、顧慮或框架，也可能逐漸鬆動，讓你更願意嘗試過去不敢做的事情。","例如在尾牙、聖誕聚會或跨年活動上，認識了聊得很投緣的新朋友；或是有人主動找你談明年的合作，讓你對新的一年充滿想像。這個月確實有新的事物開始發展的可能。","但這組最需要注意的是，想要的東西可能比目前真正能夠負荷的還要多，而且這股想要的力量會一直長大。例如同時接下太多工作，每一件都想做好，最後把自己忙到很累；聚會時搶著買單、為了跨年行程和新衣服花了一大筆錢，只為了維持形象。也可能在感情或社交上出現新的吸引力，但因為界線不夠清楚，讓事情變得比原本想像中複雜。甚至因為想要更好的生活，做出超過自己能力範圍的承諾。","12 月可能發生的事： 新的合作邀約、社交活動增加、接觸新的感情對象，或是開始籌備明年的計畫。"],"summary_label":"年末收尾指引","summary":"可以有野心，也可以對未來充滿期待，但不要為了讓自己看起來過得更好，而勉強支撐一個超過能力範圍的生活。花錢、答應邀約之前先想一想，這是為了自己，還是為了面子。","summary_strong":"真正值得帶進明年的，是能夠長久發展的機會；一時滿足慾望的選擇，就留在今年。","img":"img/card3.jpg"},{"title":"根基已穩，時機未至","subtitle":"手上的資源比想像中多，不必急著證明成果","meta_label":"12 月關鍵字","meta_value":"資源整合、穩定累積、延後發展","body":["武曲天府＋右弼＋臨官倒牌","這個月適合好好盤點自己這一年累積下來的東西。","無論是金錢、工作經驗、專業能力，還是身邊值得信任的人，其實已經具備了一定的基礎。例如年終結算時，發現今年其實存下了一筆錢；客戶的尾款、年終獎金順利入帳。也有機會得到身邊人的協助，可能是同事、朋友或另一半主動幫你分擔年底的工作，或是透過自己的能力，把原本分散的資源重新整合起來。","但這組最需要注意的是，這個月的發展速度可能沒有預期中快。例如以為會談成的加薪、升職，或原本以為年底以前可以完成的合作，最後延到明年再說。也可能年終獎金或今年的收入，比你想像中少一些。甚至已經開始為新的位置或新的計畫做準備，到了最後才發現時機還沒成熟，只能先維持現狀。","這不一定是能力不足，也不代表手上的資源沒有價值，只是目前還沒有發展到預期的規模。與其急著擴張，不如趁這個月把帳目、工作流程、合作關係，以及明年的資源配置整理好。","12 月可能發生的事： 整理財務、獲得工作上的協助、重新分配資源，或是原定年底完成的計畫有所延後。"],"summary_label":"年末收尾指引","summary":"不要因為今年還沒有達到理想中的成績，就否定自己這一整年的累積。把收入、存款和待收款項整理清楚，該追的款項主動去追，幫過你的人也要好好答謝。","summary_strong":"有些成果不需要趕在今年兌現。把基礎打好，反而更有利於明年的發展。","img":"img/card4.jpg"}]}</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const rich=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+const hl=(s,k)=>k?s.split(k).join('<em>'+k+'</em>'):s;
+const $=id=>document.getElementById(id);
+$('tag').textContent=`${D.type_label} · ${D.series}`;
+let h=esc(D.headline);if(D.headline_break_after)h=h.replace(esc(D.headline_break_after),esc(D.headline_break_after)+'<br>');
+$('h1').innerHTML=hl(h,esc(D.keyword));
+$('sub').innerHTML=rich(D.subtitle);
+$('brand1').textContent=$('brand2').textContent=D.brand;
+$('q').innerHTML=rich(D.question);$('hint').textContent=D.pick_hint;
+$('line').href=D.line_url;
+$('grid').innerHTML=D.cards.map((c,i)=>`<div class="card" data-i="${i}" role="button" tabindex="0"><div class="opt">選項 ${i+1}</div><img src="${esc(c.img)}" alt="選項 ${i+1}" loading="lazy"><span class="btn">查看解析</span></div>`).join('');
+function pick(i,scroll){
+  document.querySelectorAll('.card').forEach(el=>el.classList.toggle('on',+el.dataset.i===i));
+  const c=D.cards[i],r=$('result');
+  const meta=c.rating!=null?`<span class="stars">${'★'.repeat(c.rating)}${'☆'.repeat(5-c.rating)}</span><span class="v">${c.rating}/5</span>`:`<span class="v">${rich(c.meta_value)}</span>`;
+  r.innerHTML=`<div class="rhead"><img src="${esc(c.img)}" alt=""><div>
+    <div class="rlabel">CARD 0${i+1} · ${esc(D.result_short_label)}解析</div>
+    <div class="rtitle">${rich(c.title)}</div><div class="rsub">${rich(c.subtitle)}</div>
+    <div class="meta"><span class="k">${esc(c.meta_label)}</span>${meta}</div></div></div>
+    <div class="rbody">${c.body.map(p=>`<p>${rich(p)}</p>`).join('')}</div>
+    <div class="rsum">${c.summary_label?`<div class="k">${esc(c.summary_label)}</div>`:''}${c.summary?`<div class="t">${rich(c.summary)}</div>`:''}${c.summary_strong?`<div class="s">${rich(c.summary_strong)}</div>`:''}</div>
+    <div class="racts"><a href="#choose">↑ 重新選牌</a><a href="#book">預約個人解析 ↓</a></div>`;
+  r.classList.add('show');
+  if(scroll)r.scrollIntoView({behavior:'smooth',block:'start'});
+  history.replaceState(null,'','#card'+(i+1));
+}
+document.querySelectorAll('.card').forEach(el=>{el.onclick=()=>pick(+el.dataset.i,true);el.onkeydown=e=>{if(e.key==='Enter')pick(+el.dataset.i,true)}});
+const m=location.hash.match(/^#card([1-4])$/);if(m)pick(+m[1]-1,false);
+</script></body></html>
